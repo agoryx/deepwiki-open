@@ -12,7 +12,7 @@ services:
       - SERVER_BASE_URL=http://localhost:${PORT:-8173}
     volumes:
       - ~/.adalflow:/root/.adalflow # Persist repository and embedding data
-
+    container_name: agoryx_deepwiki
     # Resource limits for docker-compose up (not Swarm mode)
     mem_limit: 6g
     mem_reservation: 2g
