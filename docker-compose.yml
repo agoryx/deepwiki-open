@@ -1,22 +1,20 @@
-version: '3.8'
+version: "3.8"
 
 services:
   deepwiki:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - "${PORT:-8001}:${PORT:-8001}"  # API port
-      - "3000:3000"  # Next.js port
+      - "${PORT:-8173}:${PORT:-8173}" # API port
+      - "3133:3133" # Next.js port
     env_file:
       - .env
     environment:
-      - PORT=${PORT:-8001}
+      - PORT=${PORT:-8173}
       - NODE_ENV=production
-      - SERVER_BASE_URL=http://localhost:${PORT:-8001}
-      - NEXT_PUBLIC_SERVER_BASE_URL=http://localhost:${PORT:-8001}
+      - SERVER_BASE_URL=http://localhost:${PORT:-8173}
     volumes:
-      - ~/.adalflow:/root/.adalflow  # Persist repository and embedding data
+      - ~/.adalflow:/root/.adalflow # Persist repository and embedding data
+
     # Resource limits for docker-compose up (not Swarm mode)
     mem_limit: 6g
     mem_reservation: 2g
@@ -27,3 +25,10 @@ services:
       timeout: 10s
       retries: 3
       start_period: 30s
+    networks:
+      - agoryx-network
+
+networks:
+  agoryx-network:
+    external: true
+    name: agoryx-network
