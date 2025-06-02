@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   deepwiki:
     build: .
@@ -30,5 +28,6 @@ services:
 
 networks:
   agoryx-network:
+    driver: bridge
     external: true
     name: agoryx-network
